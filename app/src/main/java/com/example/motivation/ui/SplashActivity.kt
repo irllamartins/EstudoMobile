@@ -32,12 +32,23 @@ class SplashActivity() : AppCompatActivity(), View.OnClickListener{
 
         buttonId.setOnClickListener(this)
 
+        verifyName()
     }
 
     override fun onClick(view: View) {
         if(view.id == R.id.buttonSave){
             handleSave()
         }
+    }
+    //verifica nome existente,caso exista não mostra tela inicial
+    private fun verifyName(){
+        val name = mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME)
+        if(name !=""){
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
     private fun handleSave(){
         val name = editName.text.toString()
@@ -46,6 +57,7 @@ class SplashActivity() : AppCompatActivity(), View.OnClickListener{
             mSecurityPreferences.storeString(MotivationConstants.KEY.PERSON_NAME,name)
             //passa para outro layout
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }else {
             Toast.makeText(this, R.string.name_null,Toast.LENGTH_SHORT).show()
         }

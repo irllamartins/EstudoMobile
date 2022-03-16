@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mSecurityPreferences = SecurityPreferences(this)
 
         //capturar informação salva
-        mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME)
-        textName.text = mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME)
+        val name = mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME)
+        textName.text = "Olá, $name!"
 
         //tira o actionbar que fica com a configuração padrão
         if(supportActionBar!=null){
